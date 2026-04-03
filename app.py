@@ -9,5 +9,10 @@ query = st.text_input("Enter job requirements:")
 
 if st.button("Search"):
     if query:
-        result = ask(query)
-        st.write(result)
+        try:
+            result = ask(query)
+            st.write(result)
+        except Exception as exc:
+            st.error(f"Error: {exc}")
+    else:
+        st.warning("Please enter a query to search resumes.")

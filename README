@@ -1,0 +1,135 @@
+# 💼 AI Resume Screening Chatbot (RAG-based)
+
+An intelligent **Resume Screening System** that uses **Retrieval-Augmented Generation (RAG)** to filter and rank resumes based on user requirements through a chatbot interface.
+
+This project simulates a **recruiter assistant**, allowing users to input job requirements and get the most relevant candidates with explanations.
+
+---
+
+## 🚀 Features
+
+- 📄 Upload and process multiple resume PDFs
+- 🧠 Semantic search using embeddings
+- 🔍 Fast retrieval using FAISS vector database
+- 🤖 Chatbot interface for natural language queries
+- 📊 Candidate ranking based on relevance
+- 🧾 Context-aware answers using LLM (Groq / OpenAI compatible)
+
+---
+
+## 🏗️ Architecture
+
+User Query
+↓
+Embedding Generation
+↓
+FAISS Vector Search (Top K resumes)
+↓
+LLM (Context + Query)
+↓
+Ranked Candidates + Explanation
+
+
+---
+
+## 🛠️ Tech Stack
+
+### Backend
+- Python
+
+### AI / NLP
+- Sentence Transformers (embeddings)
+- LLM (Groq / OpenAI API)
+
+### Vector Database
+- FAISS
+
+### Document Processing
+- LangChain (PDF Loader, Text Splitter)
+
+### Frontend
+- Streamlit
+
+---
+
+## 📂 Project Structure
+
+resume-screening/
+│── data/ # Resume PDFs
+│── vectorstore/ # FAISS index
+│── app.py # Streamlit UI
+│── rag.py # Retrieval + LLM logic
+│── parser.py # PDF loading
+│── embedder.py # Embedding model
+│── requirements.txt
+│── .env
+│── README.md
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1️⃣ Clone Repository
+
+```bash
+git clone https://github.com/your-username/resume-screening.git
+cd resume-screening
+
+2️⃣ Create Virtual Environment
+python -m venv venv
+
+Activate:
+
+Windows:
+venv\Scripts\activate
+Mac/Linux:
+source venv/bin/activate
+
+3️⃣ Install Dependencies
+pip install -r requirements.txt
+
+4️⃣ Add API Key
+Create .env file:
+GROQ_API_KEY=your_api_key_here
+
+5️⃣ Add Resume PDFs
+Place resumes inside:
+
+data/
+6️⃣ Run Application
+streamlit run app.py
+
+💬 Usage
+Enter recruiter-style queries like:
+
+"Python developer with machine learning experience"
+"AWS cloud engineer with 3+ years experience"
+"Fresher with NLP skills"
+🧠 How It Works
+1. Resume Parsing
+PDFs are loaded using LangChain
+Text is extracted and split into chunks
+2. Embeddings
+Each chunk is converted into vector embeddings using Sentence Transformers
+3. Vector Search
+FAISS indexes embeddings
+Query is converted to vector and matched with resumes
+4. LLM Response
+Top results are passed to LLM
+LLM generates:
+Best candidates
+Matching skills
+
+Explanation:
+🧪 Sample Queries
+Query	Expected Result
+Python ML developer	Rahul, Neha
+Data analyst with experience	Amit
+Java backend developer	Priya
+AWS engineer	Arjun
+
+⚠️ Limitations
+Basic resume parsing (no structured extraction yet)
+No persistent database (FAISS stored locally)
+Limited ranking logic (can be improved)
+No authentication or user roles
